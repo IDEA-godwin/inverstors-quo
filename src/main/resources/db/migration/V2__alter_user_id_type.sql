@@ -1,0 +1,7 @@
+
+ALTER TABLE users
+    ALTER COLUMN id  DROP IDENTITY;
+
+ALTER TABLE users
+    ALTER COLUMN id TYPE VARCHAR using id::varchar;
+

@@ -1,0 +1,59 @@
+
+spring:
+  datasource:
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    url: ${DATABASE_URL}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+  data:
+    rest:
+      base-path: /api
+      detection-strategy: annotated
+  mail:
+    host: smpt.gmail.com
+    port: 587
+    username: godwinaquinas137@gmail.com
+    password: kyvpaygtguedczqd
+    properties:
+      mail:
+        smpt:
+          auth: true
+          starttls:
+            enabled: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/investors-quo
+      client:
+        registration:
+          keycloak:
+            client-id: investors-quo-backend
+            authorization-grant-type: authorization_code
+            scope: openid
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/investors-quo
+            user-name-attribute: preferred_username
+
+springdoc:
+  api-docs:
+    path: /v3/docs
+
+app:
+  keycloak:
+    realm: investors-quo
+    realm_server_url: http://localhost:8080
+    client_id: investor-quo-backend
+    admin_username: ${KEYCLOAK_ADMIN_USERNAME}
+    password: ${KEYCLOAK_ADMIN_PASSWORD}
+
+server:
+  port: 8081
+  error:
+    include-message: always
+    include-stacktrace: never
+
